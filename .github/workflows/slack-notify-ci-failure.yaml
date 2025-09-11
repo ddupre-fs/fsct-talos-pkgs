@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-11T15:10:47Z by kres 79636f7.
+# Generated on 2025-09-10T21:34:10Z by kres ba56673.
 
 "on":
   workflow_run:
@@ -9,7 +9,7 @@
     types:
       - completed
     branches:
-      - main
+      - ""
 name: slack-notify-failure
 jobs:
   slack-notify:

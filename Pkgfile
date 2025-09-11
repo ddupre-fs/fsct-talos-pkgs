@@ -92,9 +92,9 @@ vars:
   kspp_sha512: ef115e8b41526b4a248dab97daaeec85561525e4abf046799154242dcb2ebe6b37203fe0491e01b301f1948faa5b102f85c732ee503e0b999e7d4d162998fc70
 
   # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-  linux_version: 6.12.45
-  linux_sha256: 8f95a8549cfbdfb89c1181a1f55a971f04dfcd629508a2ed70b777ab92f9db3e
-  linux_sha512: 5813934ed7d47ba820e315d209c5b9080d42dba67bc86a622f0004a300c577e5e3167c6208f817c769cf8ba1c627e10e51e1d2289d18f582d8b6d047582d0db4
+  linux_version: 6.12.43
+  linux_sha256: 0fcbbbbcd456e87bbbfc8bf37af541fda62ccfcce76903503424fd101ef7bdee
+  linux_sha512: 39c8282ff2ad87cef9f2a7805fad1f628aa12413b71008cff6d10261273387491ff38cac35d42ae542a5db8cb41c6545426b31c03f9df203b58b120be299086f
 
   # renovate: datasource=git-tags extractVersion=^libaio-(?<version>.*)$ depName=https://pagure.io/libaio.git
   libaio_version: 0.3.113
@@ -258,5 +258,9 @@ vars:
   apparmor_version: v3.1.7 # v4 requires autoconf-archive
   apparmor_sha256: 64494bd99fa6547a9cbdb4fc6bc732451a02dd19e6eb70eab977b239632151eb
   apparmor_sha512: cfd6b0afb98d4559c16a6a2e23ca16ee9d86325fc6059313df5d3e8feba3d398f96a5754d3880dd2cafb2e7b1a06bd789d62cd36aaf993e46290f6311bb49dac
+
+  pf_ring_version: 1.2.3 #placeholder
+  pf_ring_sha256: 8e5efd65a5e1d6945f7198194a3de6a0a4a1d57b746a600c5105087edc6f55c0
+  pf_ring_sha512: 59bef3dd20d8bee8cd00dad93f46cd4960b192c282ebc1e43d08782d5f28f6cf0975a3521300150908e24d6aec95c3516a5da6427185684646104ab466efc9df
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/pkgs
