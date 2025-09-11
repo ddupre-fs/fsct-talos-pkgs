@@ -1,0 +1,39 @@
+name: pf_ring-pkg
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: kernel-build
+steps:
+  - sources:
+      - url: http://10.16.128.225/images/pf_ring.tar.gz
+        destination: pf_ring.tar.gz
+        sha256: "{{ .pf_ring_sha256 }}"
+        sha512: "{{ .pf_ring_sha512 }}"
+    env:
+      ARCH: {{ if eq .ARCH "x86_64" }}x86_64{{ else }}unsupported{{ end }}
+    prepare:
+      - |
+        tar -zxf pf_ring.tar.gz --strip-components=1
+    build:
+      - |
+        cd kernel
+        make -C /src M=$(pwd) EXTRA_CFLAGS='-I$(pwd) -I/usr/include -I/src/arch/x86/include/generated/ -I/src/tools/include -no-pie -fno-pie -Wno-implicit-fallthrough -Wno-error' modules INSTALL_MOD_STRIP=1 CONFIG_MODULE_SIG_ALL=y
+    install:
+      - |
+        mkdir -p /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/
+        cp /src/modules.order /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/
+        cp /src/modules.builtin /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/
+        cp /src/modules.builtin.modinfo /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/
+        #mkdir -p /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/kernel/net/pf_ring
+        #cp kernel/pf_ring.ko /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/kernel/net/pf_ring   
+        make -C /src M=$(pwd)/kernel modules_install DESTDIR=/rootfs INSTALL_MOD_PATH=/rootfs/usr INSTALL_MOD_DIR=extras INSTALL_MOD_STRIP=1 CONFIG_MODULE_SIG_ALL=y
+    test:
+      - |
+        # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
+        find /rootfs/usr/lib/modules -name '*.ko' -print -exec grep -FL '~Module signature appended~' {} \+
+      - |
+        fhs-validator /rootfs
+finalize:
+  - from: /rootfs
+    to: /

@@ -9,7 +9,7 @@
     types:
       - completed
     branches:
-      - main
+      - ""
 name: slack-notify-failure
 jobs:
   slack-notify:
