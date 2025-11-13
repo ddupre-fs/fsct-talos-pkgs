@@ -56,7 +56,7 @@
             ]
         },
         {
-            "allowedVersions": "<= 6.16",
+            "allowedVersions": "<= 6.17",
             "matchPackageNames": [
                 "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ]
@@ -90,7 +90,8 @@
             "versioning": "regex:^(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?$",
             "matchPackageNames": [
                 "benhoyt/inih",
-                "systemd/systemd"
+                "systemd/systemd",
+                "tenstorrent/tt-kmd"
             ]
         },
         {
